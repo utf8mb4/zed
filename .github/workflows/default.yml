@@ -11,3 +11,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Build
+        run: echo ${{ github.sha }} > docs/Release.txt
+      - name: Test
+        run: cat docs/Release.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            docs/Release.txt
